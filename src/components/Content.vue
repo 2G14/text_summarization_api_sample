@@ -55,7 +55,7 @@ export default class Content extends Vue {
     this.selectedLinenumber = 1;
   }
   private request(): void {
-    const key = "DZZQ0RaKsz4gfRk0LX9liU60UdhDMEkW";
+    const key = process.env.VUE_APP_KEY;
     const formdata = new FormData();
     formdata.append("apikey", key);
     formdata.append("sentences", this.text);
