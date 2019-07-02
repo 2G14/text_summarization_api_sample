@@ -3,13 +3,13 @@
     div
       form
         div
-          textarea(v-model="text" v-on:change="makeLinenumbers" placeholder="要約したいテキストを入力してください。")
-        Select(label="言語" v-model="selectedLanguage" :options="languages")
+          textarea(v-model="text" @change="makeLinenumbers" placeholder="要約したいテキストを入力してください。")
+        Select(label="言語" v-model="selectedLanguage" :options="languages" @change="makeLinenumbers")
         Select(label="要約後の文章数" v-model="selectedLinenumber" :options="linenumbers")
         div
-          button(type="button" v-on:click="request")
+          button(type="button" @click="request")
             | 要約
-          button(type="button" v-on:click="clear")
+          button(type="button" @click="clear")
             | クリア
     div
       ul
