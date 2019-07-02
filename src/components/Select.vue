@@ -14,13 +14,14 @@ import { Component, Prop, Emit, Watch, Vue } from "vue-property-decorator";
 
 @Component
 export default class Select extends Vue {
-  @Prop()
+  /** prop */
+  @Prop({ type: [String, Number], required: true })
   private label!: string | number;
-  @Prop()
+  @Prop({ type: [String, Number], required: true })
   private value!: string | number;
-  @Prop()
+  @Prop({ type: Array, required: true })
   private options!: Array<{ label: string | number; value: string | number }>;
-
+  /** data */
   private selected: string | number = this.value;
 
   private mounted(): void {
@@ -34,28 +35,15 @@ export default class Select extends Vue {
 </script>
 
 <style lang="sass" scoped>
-$input-color: blue;
-
 div.select
   width: 200px
-  margin: auto
+  margin: 5px auto
   padding: auto
   position: relative
-  border: 1px solid #bbbbbb
+  border: solid 1px black
   border-radius: 2px
-  background: #ffffff
-  &::before
-    content: ''
-    position: absolute
-    top: 0.8em
-    right: 0.9em
-    width: 0
-    height: 0
-    padding: 0
-    border-left: 6px solid transparent
-    border-right: 6px solid transparent
-    border-top: 6px solid #666666
-    pointer-events: none
+  background: #ff99d6
+  color: black
   div.label
     label
   select
@@ -63,14 +51,16 @@ div.select
     width: 100%
     cursor: pointer
     text-overflow: ellipsis
+    font-size: 16px
     border: none
+    border-top: solid 1px black
+    border-radius: 0
     outline: none
-    background: transparent
+    background: #ffb3e0
     background-image: none
     box-shadow: none
     appearance: none
     padding: 8px 38px 8px 8px
-    color: #666666
     &::-ms-expand
       display: none
     option
