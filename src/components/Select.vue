@@ -14,7 +14,6 @@ import { Component, Prop, Emit, Watch, Vue } from "vue-property-decorator";
 
 @Component
 export default class Select extends Vue {
-  /** prop */
   /**
    * label
    */
@@ -34,20 +33,19 @@ export default class Select extends Vue {
    */
   @Prop({ type: Array, required: true, default: [] })
   private options!: Array<{ label: string | number; value: string | number }>;
-  /** data */
   /**
    * selected option
    */
   private selected: string | number = this.value;
-  private created() {
-    console.log(this.selected);
-  }
-  private mounted() {
-    console.log(this.selected);
-  }
+  /**
+   * updated
+   */
   private updated() {
-    console.log(this.selected);
+    this.selected = this.value;
   }
+  /**
+   * onchange func
+   */
   private updateValue() {
     this.$emit("input", this.selected);
     this.$emit("change");
