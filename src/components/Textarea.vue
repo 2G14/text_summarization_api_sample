@@ -58,8 +58,8 @@ div.textarea
     border-radius: 0.67em
     padding: 0.5em
     background-color: snow
-    width: 30em
-    height: 140px
+    width: 80vw
+    height: 20vh
     font-size: 1em
     line-height: 1.2
     outline: none

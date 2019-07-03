@@ -51,5 +51,4 @@ div.button
     outline: none
   button:active
     transform: translateY(1px)
-    border-bottom: solid 1px black
 </style>
