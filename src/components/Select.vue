@@ -15,17 +15,38 @@ import { Component, Prop, Emit, Watch, Vue } from "vue-property-decorator";
 @Component
 export default class Select extends Vue {
   /** prop */
-  @Prop({ type: [String, Number], required: true })
-  private label!: string | number;
-  @Prop({ type: [String, Number], required: true })
+  /**
+   * label
+   */
+  @Prop({ type: String })
+  private label?: string;
+  /**
+   * initial value
+   */
+  @Prop({
+    type: [String, Number],
+    required: true,
+    default: ""
+  })
   private value!: string | number;
-  @Prop({ type: Array, required: true })
+  /**
+   * options
+   */
+  @Prop({ type: Array, required: true, default: [] })
   private options!: Array<{ label: string | number; value: string | number }>;
   /** data */
+  /**
+   * selected option
+   */
   private selected: string | number = this.value;
-
-  private mounted(): void {
-    this.$emit("input", this.options[0].value);
+  private created() {
+    console.log(this.selected);
+  }
+  private mounted() {
+    console.log(this.selected);
+  }
+  private updated() {
+    console.log(this.selected);
   }
   private updateValue() {
     this.$emit("input", this.selected);
