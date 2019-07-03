@@ -1,13 +1,10 @@
 <template lang="pug">
   div
-    div
-      form
-        div
-          Textarea(v-model="text" @change="makeLinenumbers" placeholder="要約したいテキストを入力してください。" :maxlength="200")
-        Select(label="言語" v-model="selectedLanguage" :options="languages" @change="makeLinenumbers")
-        Select(label="要約後の文章数" v-model="selectedLinenumber" :options="linenumbers")
-        div
-          Button(type="button" @click="request" text="要約")
+    form
+      Textarea(v-model="text" @change="makeLinenumbers" placeholder="要約したいテキストを入力してください。" :maxlength="200")
+      Select(label="言語" v-model="selectedLanguage" :options="languages" @change="makeLinenumbers")
+      Select(label="要約後の文章数" v-model="selectedLinenumber" :options="linenumbers")
+      Button(type="button" @click="request" text="要約")
     List(v-if="items.length > 0" :items="items")
 </template>
 
@@ -27,7 +24,6 @@ import List from "./List.vue";
   }
 })
 export default class Content extends Vue {
-  /** data */
   /**
    * text
    */
@@ -57,7 +53,9 @@ export default class Content extends Vue {
    * result items
    */
   private items: string[] = [];
-  /** methods */
+  /**
+   * make linenumbers array
+   */
   private makeLinenumbers(): void {
     this.linenumbers = [];
     const language = this.selectedLanguage;
@@ -72,6 +70,9 @@ export default class Content extends Vue {
       this.linenumbers.push({ label: 1, value: 1 });
     this.selectedLinenumber = 1;
   }
+  /**
+   * request to Text Summarization API
+   */
   private request(): void {
     const key = process.env.VUE_APP_KEY;
     const formdata = new FormData();
@@ -98,6 +99,9 @@ export default class Content extends Vue {
       })
       .catch((error: Error) => console.error("Error: ", error));
   }
+  /**
+   * separation
+   */
   private separation(): string {
     switch (this.selectedLanguage) {
       case "ja":
@@ -112,11 +116,17 @@ export default class Content extends Vue {
     }
   }
 }
+/**
+ * response data
+ */
 interface Data {
   message: string;
   status: number;
   summary: string[];
 }
+/**
+ * error handle
+ */
 function errorHandle(status: number) {
   let msg = "";
   switch (status) {
@@ -143,6 +153,4 @@ div
   text-align: center
   div
     form
-      div
-        textarea
 </style>

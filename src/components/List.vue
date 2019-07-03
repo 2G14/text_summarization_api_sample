@@ -15,9 +15,14 @@ import { Component, Prop, Emit, Watch, Vue } from "vue-property-decorator";
 
 @Component
 export default class List extends Vue {
-  /** prop */
+  /**
+   * label
+   */
   @Prop({ type: String })
   private label?: string;
+  /**
+   * list items
+   */
   @Prop({ type: Array, required: true, default: [] })
   private items!: string[];
 }

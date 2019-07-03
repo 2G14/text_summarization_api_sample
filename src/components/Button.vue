@@ -12,10 +12,19 @@ import { Component, Prop, Emit, Watch, Vue } from "vue-property-decorator";
 
 @Component
 export default class Button extends Vue {
+  /**
+   * label
+   */
   @Prop({ type: String })
   private label?: string;
+  /**
+   * text
+   */
   @Prop({ type: String, required: true, default: "" })
   private text!: string;
+  /**
+   * onclick func
+   */
   private click(): void {
     this.$emit("click");
   }

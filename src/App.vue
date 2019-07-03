@@ -27,5 +27,4 @@ body
   background: #2e8b57
   text-align: center
   h1
-    
 </style>

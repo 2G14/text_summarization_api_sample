@@ -11,20 +11,37 @@ import { Component, Prop, Emit, Watch, Vue } from "vue-property-decorator";
 
 @Component
 export default class Textarea extends Vue {
+  /**
+   * label
+   */
   @Prop({ type: String })
   private label?: string;
+  /**
+   * initial value
+   */
   @Prop({
     type: String,
     required: true,
     default: ""
   })
   private value!: string;
+  /**
+   * placeholder
+   */
   @Prop({ type: String })
   private placeholder?: string;
+  /**
+   * maxlength
+   */
   @Prop({ type: Number })
   private maxlength?: number;
-
+  /**
+   * text
+   */
   private text: string = this.value;
+  /**
+   * onchange func
+   */
   private updateValue() {
     this.$emit("input", this.text);
     this.$emit("change");
