@@ -3,7 +3,7 @@
     div(class="label")
       label(:for="label")
         | {{label}}
-    select(:name="label" v-model="selected" @change="updateValue")
+    select(:id="label" v-model="selected" @change="updateValue")
       template(v-for="(option, index) in options")
         option(:value="option.value" :key="index")
           | {{ option.label }}

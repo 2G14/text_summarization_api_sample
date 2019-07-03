@@ -3,10 +3,10 @@
     div(class="label")
       label(:for="label")
         | {{label}}
-    ul(:name="label")
+    ul(:id="label")
       template(v-for="(item, index) in items")
         li(:key="index")
-          div()
+          div(class="item")
             | {{item}}
 </template>
 

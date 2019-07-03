@@ -3,7 +3,7 @@
     div(class="label")
       label(:for="label")
         | {{label}}
-    textarea(:name="label" v-model="text" @change="updateValue" :placeholder="placeholder" :maxlength="maxlength")
+    textarea(:id="label" v-model="text" @change="updateValue" :placeholder="placeholder" :maxlength="maxlength")
 </template>
 
 <script lang="ts">

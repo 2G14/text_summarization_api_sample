@@ -3,7 +3,7 @@
     div(class="label")
       label(:for="label")
         | {{label}}
-    button(type="button" @click="click")
+    button(:id="label" type="button" @click="click")
       | {{text}}
 </template>
 
