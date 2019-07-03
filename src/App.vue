@@ -20,7 +20,10 @@ import Content from "./components/Content.vue";
 export default class App extends Vue {}
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
+body
+  margin: 0
+  padding: 0
 #app
   font-family: "Avenir", Helvetica, Arial, sans-serif
   -webkit-font-smoothing: antialiased

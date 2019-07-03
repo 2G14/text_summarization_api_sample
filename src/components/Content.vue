@@ -3,41 +3,58 @@
     div
       form
         div
-          textarea(v-model="text" @change="makeLinenumbers" placeholder="要約したいテキストを入力してください。")
+          Textarea(maxlength="200" v-model="text" @change="makeLinenumbers" placeholder="要約したいテキストを入力してください。")
         Select(label="言語" v-model="selectedLanguage" :options="languages" @change="makeLinenumbers")
         Select(label="要約後の文章数" v-model="selectedLinenumber" :options="linenumbers")
         div
           button(type="button" @click="request")
             | 要約
-          button(type="button" @click="clear")
-            | クリア
-    div
-      ul
-        li(v-for="(item, index) in items" v-bind:key="index")
-          | {{item}}
+    List(:items="items")
 </template>
 
 <script lang="ts">
 import { Component, Prop, Emit, Watch, Vue } from "vue-property-decorator";
+import Textarea from "./Textarea.vue";
 import Select from "./Select.vue";
+import List from "./List.vue";
 
 @Component({
   components: {
-    Select
+    Textarea,
+    Select,
+    List
   }
 })
 export default class Content extends Vue {
   /** data */
+  /**
+   * text
+   */
   private text: string = "";
+  /**
+   * selected language
+   */
   private selectedLanguage: string = "ja";
+  /**
+   * languages
+   */
   private languages: Array<{ label: string; value: string }> = [
     { label: "日本語", value: "ja" },
     { label: "英語", value: "en" }
   ];
+  /**
+   * selected linenumber
+   */
   private selectedLinenumber: number = 1;
+  /**
+   * linenumber
+   */
   private linenumbers: Array<{ label: number; value: number }> = [
     { label: 1, value: 1 }
   ];
+  /**
+   * result items
+   */
   private items: string[] = [];
   /** methods */
   private makeLinenumbers(): void {
@@ -79,13 +96,6 @@ export default class Content extends Vue {
         }
       })
       .catch((error: Error) => console.error("Error: ", error));
-  }
-  private clear(): void {
-    this.text = "";
-    this.selectedLanguage = "ja";
-    this.selectedLinenumber = 1;
-    this.linenumbers = [{ label: 1, value: 1 }];
-    this.items = [];
   }
   private separation(): string {
     switch (this.selectedLanguage) {
@@ -134,8 +144,4 @@ div
     form
       div
         textarea
-  div
-    ul
-      padding: 0
-      list-style: none
 </style>
