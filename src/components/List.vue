@@ -25,6 +25,10 @@ export default class List extends Vue {
 
 <style lang="sass" scoped>
 div.list
+  width: 200px
+  margin: 5px auto
+  padding: auto
+  position: relative
   div.label
     label
   ul
@@ -32,4 +36,6 @@ div.list
     list-style: none
     li
       div
+        border: solid 1px black
+        border-radius: 2px
 </style>

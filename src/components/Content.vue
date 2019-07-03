@@ -3,25 +3,26 @@
     div
       form
         div
-          Textarea(maxlength="200" v-model="text" @change="makeLinenumbers" placeholder="要約したいテキストを入力してください。")
+          Textarea(v-model="text" @change="makeLinenumbers" placeholder="要約したいテキストを入力してください。" :maxlength="200")
         Select(label="言語" v-model="selectedLanguage" :options="languages" @change="makeLinenumbers")
         Select(label="要約後の文章数" v-model="selectedLinenumber" :options="linenumbers")
         div
-          button(type="button" @click="request")
-            | 要約
-    List(:items="items")
+          Button(type="button" @click="request" text="要約")
+    List(v-if="items.length > 0" :items="items")
 </template>
 
 <script lang="ts">
 import { Component, Prop, Emit, Watch, Vue } from "vue-property-decorator";
 import Textarea from "./Textarea.vue";
 import Select from "./Select.vue";
+import Button from "./Button.vue";
 import List from "./List.vue";
 
 @Component({
   components: {
     Textarea,
     Select,
+    Button,
     List
   }
 })
