@@ -2,10 +2,13 @@
   div
     form
       Textarea(v-model="text" @change="makeLinenumbers" placeholder="要約したいテキストを入力してください。" :maxlength="200")
+      div#error_msg
+        | {{ errorMassage }}
       Select(label="言語" v-model="selectedLanguage" :options="languages" @change="makeLinenumbers")
       Select(label="要約後の文章数" v-model="selectedLinenumber" :options="linenumbers")
       Button(type="button" @click="request" text="要約")
     List(v-if="items.length > 0" :items="items")
+    Loading(:show="show" text="ロード中")
 </template>
 
 <script lang="ts">
@@ -14,13 +17,15 @@ import Textarea from "./Textarea.vue";
 import Select from "./Select.vue";
 import Button from "./Button.vue";
 import List from "./List.vue";
+import Loading from "./Loading.vue";
 
 @Component({
   components: {
     Textarea,
     Select,
     Button,
-    List
+    List,
+    Loading
   }
 })
 export default class Content extends Vue {
@@ -54,6 +59,14 @@ export default class Content extends Vue {
    */
   private items: string[] = [];
   /**
+   * API処理中のローディング表示の有無
+   */
+  private show: boolean = false;
+  /**
+   * エラーメッセージ
+   */
+  private errorMassage: string = "";
+  /**
    * make linenumbers array
    */
   private makeLinenumbers(): void {
@@ -74,6 +87,8 @@ export default class Content extends Vue {
    * request to Text Summarization API
    */
   private request(): void {
+    this.show = true;
+    this.errorMassage = "";
     const key = process.env.VUE_APP_KEY;
     const formdata = new FormData();
     formdata.append("apikey", key);
@@ -94,10 +109,28 @@ export default class Content extends Vue {
           );
           if (this.items.length > 10) this.items.pop();
         } else {
-          errorHandle(data.status);
+          switch (data.status) {
+            case 1400:
+              this.errorMassage =
+                "テキストは２文以上を入力してください。\n文章の最後には必ず日本語では「。」、英語では「.」を入力してください。";
+              break;
+            case 1413:
+              this.errorMassage =
+                "テキストは200文字以下、10文章以下で入力してください。";
+              break;
+            case 1500:
+              this.errorMassage = "処理でエラーが発生しました。";
+              break;
+            default:
+              break;
+          }
+          console.log(this.errorMassage);
         }
       })
-      .catch((error: Error) => console.error("Error: ", error));
+      .catch((error: Error) => console.error("Error: ", error))
+      .then(() => {
+        this.show = false;
+      });
   }
   /**
    * separation
@@ -124,33 +157,13 @@ interface Data {
   status: number;
   summary: string[];
 }
-/**
- * error handle
- */
-function errorHandle(status: number) {
-  let msg = "";
-  switch (status) {
-    case 1400:
-      msg =
-        "テキストは２文以上を入力してください。\n文章の最後には必ず日本語では「。」、英語では「.」を入力してください。";
-      break;
-    case 1413:
-      msg = "テキストは200文字以下、10文章以下で入力してください。";
-      break;
-    case 1500:
-      msg = "処理でエラーが発生しました。";
-      break;
-    default:
-      break;
-  }
-  console.log(msg);
-  alert(msg);
-}
 </script>
 
 <style lang="sass" scoped>
 div
   text-align: center
-  div
-    form
+  form
+    div#error_msg
+      color: red
+      white-space: pre-wrap
 </style>
