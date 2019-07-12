@@ -1,5 +1,5 @@
 <template lang="pug">
-  div.loading(v-show="show")
+  div.loading(v-show="isLoading")
     div.overlay
       div(v-text="text")
 </template>
@@ -13,11 +13,11 @@ export default class Loading extends Vue {
    * 表示中か否か
    */
   @Prop({ type: Boolean, required: true, default: false })
-  private show!: boolean;
+  private isLoading!: boolean;
   /**
    * テキスト
    */
-  @Prop({ type: String })
+  @Prop({ type: String, default: "ロード中" })
   private text?: string;
 }
 </script>

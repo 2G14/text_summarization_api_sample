@@ -7,7 +7,7 @@
       Select(label="要約後の文章数" v-model="selectedLinenumber" :options="linenumbers")
       Button(type="button" @click="request" text="要約")
     List(v-if="items.length > 0" :items="items")
-    Loading(:show="show" text="ロード中")
+    Loading(:isLoading="isLoading")
 </template>
 
 <script lang="ts">
@@ -62,7 +62,7 @@ export default class Content extends Vue {
   /**
    * API処理中のローディング表示の有無
    */
-  private show: boolean = false;
+  private isLoading: boolean = false;
   /**
    * エラーメッセージ
    */
@@ -88,7 +88,7 @@ export default class Content extends Vue {
    * request to Text Summarization API
    */
   private request(): void {
-    this.show = true;
+    this.isLoading = true;
     this.errorMessage = "";
     const key = process.env.VUE_APP_KEY;
     const formdata = new FormData();
@@ -130,7 +130,7 @@ export default class Content extends Vue {
       })
       .catch((error: Error) => console.error("Error: ", error))
       .then(() => {
-        this.show = false;
+        this.isLoading = false;
       });
   }
   /**
