@@ -13,11 +13,11 @@
 
 <script lang="ts">
 import { Component, Prop, Emit, Watch, Vue } from "vue-property-decorator";
-import Textarea from "./Textarea.vue";
-import Select from "./Select.vue";
-import Button from "./Button.vue";
-import List from "./List.vue";
-import Loading from "./Loading.vue";
+import Textarea from "@/components/Textarea.vue";
+import Select from "@/components/Select.vue";
+import Button from "@/components/Button.vue";
+import List from "@/components/List.vue";
+import Loading from "@/components/Loading.vue";
 
 @Component({
   components: {
