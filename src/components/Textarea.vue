@@ -40,11 +40,21 @@ export default class Textarea extends Vue {
    */
   private text: string = this.value;
   /**
+   * emit input
+   */
+  @Emit("input")
+  private input(value: string) {}
+  /**
+   * emit change
+   */
+  @Emit("change")
+  private change() {}
+  /**
    * onchange func
    */
   private updateValue() {
-    this.$emit("input", this.text);
-    this.$emit("change");
+    this.input(this.text);
+    this.change();
   }
 }
 </script>
