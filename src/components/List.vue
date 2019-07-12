@@ -1,6 +1,6 @@
 <template lang="pug">
-  div(class="list")
-    div(class="label")
+  div.list
+    div.label
       label(:for="label")
         | {{label}}
     ul(:id="label")

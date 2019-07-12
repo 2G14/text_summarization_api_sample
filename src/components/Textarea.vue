@@ -1,6 +1,6 @@
 <template lang="pug">
-  div(class="textarea")
-    div(class="label")
+  div.textarea
+    div.label
       label(:for="label")
         | {{label}}
     textarea(:id="label" v-model="text" @change="updateValue" :placeholder="placeholder" :maxlength="maxlength")

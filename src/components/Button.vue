@@ -1,6 +1,6 @@
 <template lang="pug">
-  div(class="button")
-    div(class="label")
+  div.button
+    div.label
       label(:for="label")
         | {{label}}
     button(:id="label" type="button" @click="click")

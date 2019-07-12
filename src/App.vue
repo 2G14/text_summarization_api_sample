@@ -3,7 +3,7 @@
     div
       h1
         | Text Summarization
-    div(id="app")
+    div#app
       Content
 </template>
 

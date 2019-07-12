@@ -1,6 +1,6 @@
 <template lang="pug">
-  div(class="select")
-    div(class="label")
+  div.select
+    div.label
       label(:for="label")
         | {{label}}
     select(:id="label" v-model="selected" @change="updateValue")
