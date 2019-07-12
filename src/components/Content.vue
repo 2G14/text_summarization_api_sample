@@ -2,7 +2,7 @@
   div
     form
       Textarea(v-model="text" @change="makeLinenumbers" placeholder="要約したいテキストを入力してください。" :maxlength="200")
-      ErroMessage(:existsError="errorMessage" :message="errorMessage")
+      ErrorMessage(:existsError="errorMessage === ''" :message="errorMessage")
       Select(label="言語" v-model="selectedLanguage" :options="languages" @change="makeLinenumbers")
       Select(label="要約後の文章数" v-model="selectedLinenumber" :options="linenumbers")
       Button(type="button" @click="request" text="要約")
@@ -17,7 +17,7 @@ import Select from "@/components/Select.vue";
 import Button from "@/components/Button.vue";
 import List from "@/components/List.vue";
 import Loading from "@/components/Loading.vue";
-import ErroMessage from "@/components/ErrorMessage.vue";
+import ErrorMessage from "@/components/ErrorMessage.vue";
 
 @Component({
   components: {
@@ -26,7 +26,7 @@ import ErroMessage from "@/components/ErrorMessage.vue";
     Button,
     List,
     Loading,
-    ErroMessage
+    ErrorMessage
   }
 })
 export default class Content extends Vue {
