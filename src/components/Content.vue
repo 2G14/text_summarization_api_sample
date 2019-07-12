@@ -2,8 +2,7 @@
   div
     form
       Textarea(v-model="text" @change="makeLinenumbers" placeholder="要約したいテキストを入力してください。" :maxlength="200")
-      div#error_msg
-        | {{ errorMassage }}
+      ErroMessage(:existsError="errorMessage" :message="errorMessage")
       Select(label="言語" v-model="selectedLanguage" :options="languages" @change="makeLinenumbers")
       Select(label="要約後の文章数" v-model="selectedLinenumber" :options="linenumbers")
       Button(type="button" @click="request" text="要約")
@@ -18,6 +17,7 @@ import Select from "@/components/Select.vue";
 import Button from "@/components/Button.vue";
 import List from "@/components/List.vue";
 import Loading from "@/components/Loading.vue";
+import ErroMessage from "@/components/ErrorMessage.vue";
 
 @Component({
   components: {
@@ -25,7 +25,8 @@ import Loading from "@/components/Loading.vue";
     Select,
     Button,
     List,
-    Loading
+    Loading,
+    ErroMessage
   }
 })
 export default class Content extends Vue {
@@ -65,7 +66,7 @@ export default class Content extends Vue {
   /**
    * エラーメッセージ
    */
-  private errorMassage: string = "";
+  private errorMessage: string = "";
   /**
    * make linenumbers array
    */
@@ -88,7 +89,7 @@ export default class Content extends Vue {
    */
   private request(): void {
     this.show = true;
-    this.errorMassage = "";
+    this.errorMessage = "";
     const key = process.env.VUE_APP_KEY;
     const formdata = new FormData();
     formdata.append("apikey", key);
@@ -111,20 +112,20 @@ export default class Content extends Vue {
         } else {
           switch (data.status) {
             case 1400:
-              this.errorMassage =
+              this.errorMessage =
                 "テキストは２文以上を入力してください。\n文章の最後には必ず日本語では「。」、英語では「.」を入力してください。";
               break;
             case 1413:
-              this.errorMassage =
+              this.errorMessage =
                 "テキストは200文字以下、10文章以下で入力してください。";
               break;
             case 1500:
-              this.errorMassage = "処理でエラーが発生しました。";
+              this.errorMessage = "処理でエラーが発生しました。";
               break;
             default:
               break;
           }
-          console.log(this.errorMassage);
+          console.log(this.errorMessage);
         }
       })
       .catch((error: Error) => console.error("Error: ", error))
@@ -163,9 +164,4 @@ interface Data {
 div
   text-align: center
   form
-    div#error_msg
-      background: rgba(255,0,0,0.35)
-      font-weight: bold
-      color: red
-      white-space: pre-wrap
 </style>
