@@ -6,7 +6,7 @@
       Select(label="言語" v-model="selectedLanguage" :options="languages" @change="makeLinenumbers")
       Select(label="要約後の文章数" v-model="selectedLinenumber" :options="linenumbers")
       Button(type="button" @click="request" text="要約")
-    List(v-if="items.length > 0" :items="items")
+    List(v-show="items.length > 0" :items="items")
     Loading(:isLoading="isLoading")
 </template>
 
