@@ -2,7 +2,7 @@
   div
     form
       Textarea(v-model="text" @change="makeLinenumbers" placeholder="要約したいテキストを入力してください。" :maxlength="200")
-      ErrorMessage(:existsError="errorMessage === ''" :message="errorMessage")
+      ErrorMessage(:existsError="errorMessage !== ''" :message="errorMessage")
       Select(label="言語" v-model="selectedLanguage" :options="languages" @change="makeLinenumbers")
       Select(label="要約後の文章数" v-model="selectedLinenumber" :options="linenumbers")
       Button(type="button" @click="request" text="要約")
@@ -37,13 +37,13 @@ export default class Content extends Vue {
   /**
    * selected language
    */
-  private selectedLanguage: string = "ja";
+  private selectedLanguage: Language = Language.Japanese;
   /**
    * languages
    */
-  private languages: Array<{ label: string; value: string }> = [
-    { label: "日本語", value: "ja" },
-    { label: "英語", value: "en" }
+  private languages: Array<{ label: string; value: Language }> = [
+    { label: "日本語", value: Language.Japanese },
+    { label: "英語", value: Language.English }
   ];
   /**
    * selected linenumber
@@ -75,7 +75,7 @@ export default class Content extends Vue {
     const language = this.selectedLanguage;
     const text = this.text;
     const separation: string =
-      (language === "ja" && "。") || (language === "en" && "\\.") || "";
+      (language === Language.Japanese && "。") || (language === Language.English && "\\.") || "";
     const count: number = (text.match(new RegExp(separation, "g")) || " ")
       .length;
     for (let i = 0; i < count - 1; i++)
@@ -138,17 +138,18 @@ export default class Content extends Vue {
    */
   private separation(): string {
     switch (this.selectedLanguage) {
-      case "ja":
+      case Language.Japanese:
         return "。";
         break;
-      case "en":
+      case Language.English:
         return ".";
-        break;
-      default:
-        return "";
         break;
     }
   }
+}
+enum Language {
+  Japanese,
+  English
 }
 /**
  * response data
