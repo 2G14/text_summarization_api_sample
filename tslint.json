@@ -16,6 +16,7 @@
     "no-consecutive-blank-lines": false,
     "no-console": false,
     "trailing-comma": false,
-    "curly": false
+    "curly": false,
+    "no-empty": false
   }
 }
