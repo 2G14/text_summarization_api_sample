@@ -20,10 +20,12 @@ export default class App extends Vue {}
 </script>
 
 <style lang="sass">
+$background: #00b377
+
 body
   margin: 0
   padding: 0
-  background: #2e8b57
+  background: $background
   text-align: center
   h1
 </style>

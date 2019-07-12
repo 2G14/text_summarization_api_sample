@@ -29,6 +29,11 @@ export default class List extends Vue {
 </script>
 
 <style lang="sass" scoped>
+$blue: #528fcc
+$lightblue: #99ccff
+$pink: #ff99d6
+$lightpink: #ffb3e0
+
 div.list
   width: 80vw
   margin: 5px auto
@@ -41,15 +46,15 @@ div.list
     margin: 0
     padding: 0
     list-style: none
-    border-top: solid 1px #af3dcc
-    border-bottom: solid 1px #af3dcc
+    border-top: solid 1px $pink
+    border-bottom: solid 1px $pink
     li
       div
         padding: 0.5em
         line-height: 1.5
-        border-top: solid 1px #af3dcc
-        border-bottom: solid 1px #af3dcc
-        border-left: solid 2px #af3dcc
-        border-right: solid 2px #af3dcc
-        background: #ffb3e0
+        border-top: solid 1px $pink
+        border-bottom: solid 1px $pink
+        border-left: solid 2px $pink
+        border-right: solid 2px $pink
+        background: $lightpink
 </style>

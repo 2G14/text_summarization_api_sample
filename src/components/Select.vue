@@ -54,6 +54,11 @@ export default class Select extends Vue {
 </script>
 
 <style lang="sass" scoped>
+$blue: #528fcc
+$lightblue: #99ccff
+$pink: #ff99d6
+$lightpink: #ffb3e0
+
 div.select
   width: 200px
   margin: 5px auto
@@ -61,7 +66,7 @@ div.select
   position: relative
   border: solid 1px black
   border-radius: 2px
-  background: #ff99d6
+  background: $pink
   color: black
   div.label
     label
@@ -75,7 +80,7 @@ div.select
     border-top: solid 1px black
     border-radius: 0
     outline: none
-    background: #ffb3e0
+    background: $lightpink
     background-image: none
     box-shadow: none
     appearance: none

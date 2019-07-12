@@ -32,6 +32,9 @@ export default class Button extends Vue {
 </script>
 
 <style lang="sass" scoped>
+$blue: #528fcc
+$pink: #ff99d6
+
 div.button
   width: 200px
   margin: 5px auto
@@ -43,7 +46,7 @@ div.button
     display: inline-block
     padding: 0.5em 1em
     text-decoration: none
-    background: #ff99d6
+    background: $pink
     color: black
     border: solid 1px black
     border-bottom: solid 2px black

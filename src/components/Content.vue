@@ -164,6 +164,8 @@ div
   text-align: center
   form
     div#error_msg
+      background: rgba(255,0,0,0.35)
+      font-weight: bold
       color: red
       white-space: pre-wrap
 </style>

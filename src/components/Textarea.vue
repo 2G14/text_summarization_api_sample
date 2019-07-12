@@ -60,11 +60,14 @@ export default class Textarea extends Vue {
 </script>
 
 <style lang="sass" scoped>
+$blue: #528fcc
+$pink: #ff99d6
+
 div.textarea
   div.label
     label
   textarea
-    border: 3px solid #ff99d6
+    border: 3px solid $pink
     border-radius: 0.67em
     padding: 0.5em
     background-color: snow
