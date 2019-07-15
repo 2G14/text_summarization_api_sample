@@ -1,28 +1,42 @@
 # text_summarization_app
 
-## Project setup
+[テキストを要約するText Summarization API](https://a3rt.recruit-tech.co.jp/product/TextSummarizationAPI/)
+を使用したVue.jsの練習用アプリ
+
+## Set up
+
+make .env file
+
+```bash
+$ yarn install
+$ touch .env
 ```
-yarn install
+
+write Text Summrization API Key
+
+```.env
+VUE_APP_KEY=[Your Text Summarization API Key]
 ```
 
 ### Compiles and hot-reloads for development
-```
-yarn run serve
+
+```bash
+$ yarn serve
 ```
 
 ### Compiles and minifies for production
 ```
-yarn run build
+yarn build
 ```
 
 ### Run your tests
 ```
-yarn run test
+yarn test
 ```
 
 ### Lints and fixes files
 ```
-yarn run lint
+yarn lint
 ```
 
 ### Customize configuration
